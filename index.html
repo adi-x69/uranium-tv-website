@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Uranium TV — Download</title>
+<meta name="theme-color" content="#07060a">
+<style>
+:root{
+  --bg:#07060a; --panel:#100c12; --line:#3a0f17; --red:#ff2a3d; --red-hot:#ff5a68; --red-deep:#8e0b1a;
+  --text:#f3e9ea; --muted:#a48f93;
+  --font:"Segoe UI","Helvetica Neue",Roboto,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font);overflow-x:hidden;line-height:1.6}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellipse at 50% -10%,rgba(255,42,61,.18),transparent 60%),radial-gradient(ellipse at 80% 90%,rgba(142,11,26,.22),transparent 55%);pointer-events:none;z-index:0}
+#fx{position:fixed;inset:0;z-index:0;pointer-events:none}
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--red-deep),var(--red),#fff);box-shadow:0 0 12px var(--red);z-index:50}
+main,footer{position:relative;z-index:1}
+section{max-width:1040px;margin:0 auto;padding:32px 20px}
+
+/* HERO */
+.hero{min-height:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-top:24px;padding-bottom:0}
+.logo-wrap{position:relative;width:min(270px,68vw);aspect-ratio:1;display:grid;place-items:center;animation:pop .9s cubic-bezier(.2,1.2,.3,1) both}
+.logo-wrap::before{content:"";position:absolute;inset:-18%;border-radius:50%;background:radial-gradient(circle,rgba(255,42,61,.45),rgba(142,11,26,.18) 45%,transparent 68%);animation:glowpulse 3.2s ease-in-out infinite}
+.logo-wrap::after{content:"";position:absolute;inset:-10%;border-radius:50%;background:conic-gradient(from 0deg,transparent 0 55%,rgba(255,90,104,.5) 72%,transparent 90%);filter:blur(22px);animation:spin 6s linear infinite;z-index:0}
+.logo-wrap svg,.logo-wrap img{position:relative;z-index:1;width:100%;height:100%;filter:drop-shadow(0 0 22px rgba(255,42,61,.6))}
+#nucleus{transform-box:fill-box;transform-origin:center;animation:breathe 2.4s ease-in-out infinite}
+#atom-system>g:not(#nucleus){animation:orbitglow 3s ease-in-out infinite alternate}
+.logo-wrap img{object-fit:contain}
+.ring{transform-origin:100px 100px;animation:spin 14s linear infinite}
+.ring.r2{animation-duration:9s;animation-direction:reverse}
+.ring.r3{animation-duration:20s}
+.badge-ring{transform-origin:100px 100px;animation:spin 40s linear infinite reverse}
+.nucleus{animation:breathe 2.4s ease-in-out infinite;transform-origin:100px 100px}
+h1{animation:shake 2.4s steps(1,end) 1.2s infinite;margin-top:22px;font-size:clamp(2.2rem,8vw,4.6rem);font-weight:800;letter-spacing:.14em;line-height:1;color:#fff;text-shadow:0 0 18px rgba(255,42,61,.8),0 0 60px rgba(255,42,61,.4);position:relative}
+h1 span{display:inline-block;opacity:0;animation:letter .55s cubic-bezier(.2,.9,.3,1.2) both}
+
+.tag{margin-top:12px;color:var(--muted);font-size:clamp(.95rem,2.4vw,1.1rem);letter-spacing:.08em;animation:rise .7s .5s both}
+.cta-top{margin-top:18px;animation:rise .7s .7s both}
+.scroll-hint{position:absolute;bottom:26px;left:50%;width:24px;height:40px;border:2px solid var(--red-deep);border-radius:14px;transform:translateX(-50%);opacity:.8}
+.scroll-hint::after{content:"";position:absolute;top:7px;left:50%;width:4px;height:8px;margin-left:-2px;border-radius:2px;background:var(--red);animation:wheel 1.6s infinite}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:12px;padding:16px 34px;border-radius:999px;border:1px solid var(--red);background:linear-gradient(135deg,rgba(255,42,61,.25),rgba(142,11,26,.35));color:#fff;font:700 1rem var(--font);letter-spacing:.08em;text-decoration:none;cursor:pointer;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}
+.btn::before{content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);animation:sheen 3.2s infinite}
+.btn:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 0 34px rgba(255,42,61,.7)}
+.btn:focus-visible{outline:3px solid #fff;outline-offset:4px}
+.btn svg{width:22px;height:22px}
+
+/* SECTIONS */
+h2{font-size:clamp(1.4rem,4.2vw,2rem);margin-bottom:8px;letter-spacing:.04em}
+.lead{color:var(--muted);max-width:60ch;margin-bottom:24px;font-size:.95rem}
+.divider{height:2px;max-width:200px;margin:0 0 14px;background:linear-gradient(90deg,var(--red),transparent);transform-origin:left;transform:scaleX(0);transition:transform 1s .2s}
+.in .divider,.divider.in{transform:scaleX(1)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;perspective:900px}
+.card{background:linear-gradient(160deg,rgba(255,42,61,.07),rgba(16,12,18,.9));border:1px solid var(--line);border-radius:16px;padding:18px 20px;position:relative;overflow:hidden;transform-style:preserve-3d;transition:transform .15s ease-out,border-color .3s,box-shadow .3s}
+.card::after{content:"";position:absolute;inset:0;background:radial-gradient(260px circle at var(--mx,50%) var(--my,0%),rgba(255,42,61,.22),transparent 60%);opacity:0;transition:opacity .3s;pointer-events:none}
+.card:hover{border-color:var(--red);box-shadow:0 0 30px rgba(255,42,61,.25)}
+.card:hover::after{opacity:1}
+.card .ic{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:rgba(255,42,61,.15);border:1px solid var(--red-deep);margin-bottom:10px;font-size:1.15rem}
+.card h3{font-size:1rem;margin-bottom:4px}
+.card p{color:var(--muted);font-size:.88rem;line-height:1.5}
+
+/* STATS */
+.stats{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+.stat{flex:1 1 150px;text-align:center;padding:14px;border:1px solid var(--line);border-radius:14px;background:rgba(16,12,18,.7)}
+.stat b{display:block;font-size:1.7rem;color:var(--red-hot);text-shadow:0 0 16px rgba(255,42,61,.6)}
+.stat small{color:var(--muted)}
+
+/* TABLE */
+.tbl{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:rgba(16,12,18,.85);box-shadow:0 0 50px rgba(255,42,61,.1)}
+table{width:100%;border-collapse:collapse}
+th,td{padding:12px 18px;text-align:left;border-bottom:1px solid rgba(58,15,23,.7)}
+th{width:40%;color:var(--muted);font-weight:600}
+td{font-weight:700;color:#fff}
+tr:last-child th,tr:last-child td{border-bottom:0}
+tbody tr{opacity:0;transform:translateX(-40px);transition:opacity .6s,transform .6s,background .3s}
+.tbl.in tbody tr{opacity:1;transform:none}
+tbody tr:hover{background:rgba(255,42,61,.08)}
+.copy{margin-left:10px;background:none;border:1px solid var(--red-deep);color:var(--red-hot);border-radius:8px;padding:2px 10px;cursor:pointer;font:600 .75rem var(--font)}
+.copy:hover{background:rgba(255,42,61,.15)}
+
+/* DOWNLOAD */
+.dl{text-align:center}
+.dl .big{position:relative;display:inline-block;margin-top:6px}
+.dl .big::before,.dl .big::after{content:"";position:absolute;inset:-4px;border-radius:999px;border:2px solid var(--red);animation:ping 2.4s infinite;opacity:0}
+.dl .big::after{animation-delay:1.2s}
+.dl .btn{padding:17px 44px;font-size:1.1rem}
+.bar{width:min(340px,80%);height:6px;margin:18px auto 0;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden;opacity:0;transition:opacity .3s}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--red-deep),var(--red),#fff);box-shadow:0 0 12px var(--red)}
+.bar.on{opacity:1}
+.bar.on i{animation:fill 2.2s ease-out forwards}
+.note{margin-top:10px;color:var(--muted);font-size:.9rem;min-height:1.4em}
+footer{text-align:center;padding:16px 20px 22px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+footer b{color:var(--red-hot)}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(30px) scale(.97);filter:blur(6px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1),filter .9s}
+.rv.in{opacity:1;transform:none;filter:none}
+.rv.left{transform:translateX(-70px)} .rv.right{transform:translateX(70px)}
+.rv.left.in,.rv.right.in{transform:none}
+
+/* KEYFRAMES */
+@keyframes orbitglow{from{opacity:.8}to{opacity:1}}
+@keyframes glowpulse{0%,100%{transform:scale(.95);opacity:.75;filter:hue-rotate(0deg) saturate(1)}33%{transform:scale(1.1);opacity:1;filter:hue-rotate(-12deg) saturate(1.2)}66%{transform:scale(1.03);opacity:.9;filter:hue-rotate(14deg) saturate(1.3)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes breathe{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(1.12);opacity:1}}
+@keyframes pop{from{opacity:0;transform:scale(.2) rotate(-180deg)}to{opacity:1;transform:none}}
+@keyframes letter{from{opacity:0;transform:translateY(28px) scale(.7);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+@keyframes shake{0%,76%,100%{transform:none;text-shadow:0 0 18px rgba(255,42,61,.8),0 0 60px rgba(255,42,61,.4)}78%{transform:translate(-4px,1px) skewX(-6deg);text-shadow:4px 0 #ff2a3d,-4px 0 #fff,0 0 30px rgba(255,42,61,.9)}80%{transform:translate(4px,-2px) skewX(5deg);text-shadow:-4px 0 #ff2a3d,4px 0 #fff,0 0 30px rgba(255,42,61,.9)}82%{transform:translate(-3px,0);text-shadow:3px 0 #ff2a3d,-3px 0 #fff}84%{transform:translate(3px,2px) skewX(-3deg);text-shadow:-3px 0 #ff2a3d,3px 0 #fff}86%{transform:translate(-1px,-1px);text-shadow:2px 0 #ff2a3d,-2px 0 #fff}88%{transform:none;text-shadow:0 0 18px rgba(255,42,61,.8),0 0 60px rgba(255,42,61,.4)}}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<main>
+  <!-- HERO: logo on top -->
+  <section class="hero" id="top">
+    <div class="logo-wrap" id="logo">
+      <!-- Logo -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" role="img" aria-label="Uranium TV logo">
+  <defs>
+    <clipPath id="portalClip"><circle cx="500" cy="500" r="388" /></clipPath>
+    <clipPath id="reelCurveClip"><path d="M 390,715 C 530,610 695,525 895,465 L 915,635 C 715,695 550,780 410,885 Z" /></clipPath>
+    <radialGradient id="bgRadial" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#330812" /><stop offset="58%" stop-color="#14060a" /><stop offset="100%" stop-color="#070305" />
+    </radialGradient>
+    <linearGradient id="bezelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#364052" /><stop offset="50%" stop-color="#1e2430" /><stop offset="100%" stop-color="#12161f" />
+    </linearGradient>
+    <linearGradient id="armorGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6c7c96" /><stop offset="50%" stop-color="#4b576b" /><stop offset="100%" stop-color="#353e4f" />
+    </linearGradient>
+    <radialGradient id="nucleusSphere" cx="35%" cy="32%" r="65%">
+      <stop offset="0%" stop-color="#ffd6de" /><stop offset="15%" stop-color="#ff3347" /><stop offset="50%" stop-color="#e60012" /><stop offset="84%" stop-color="#7d0008" /><stop offset="100%" stop-color="#330003" />
+    </radialGradient>
+    <radialGradient id="electronSphere" cx="38%" cy="38%" r="62%">
+      <stop offset="0%" stop-color="#ffffff" /><stop offset="35%" stop-color="#ff8fa0" /><stop offset="70%" stop-color="#e6001b" /><stop offset="100%" stop-color="#3b0006" />
+    </radialGradient>
+    <linearGradient id="filmGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#755662" stop-opacity="0.78" /><stop offset="50%" stop-color="#543a45" stop-opacity="0.84" /><stop offset="100%" stop-color="#3b252e" stop-opacity="0.88" />
+    </linearGradient>
+  </defs>
+
+  <g id="outer-bezel">
+    <circle cx="500" cy="500" r="478" fill="#0b0e14" />
+    <circle cx="500" cy="500" r="442" fill="none" stroke="url(#bezelGrad)" stroke-width="58" />
+    <circle cx="500" cy="500" r="442" fill="none" stroke="url(#armorGrad)" stroke-width="56" stroke-dasharray="74 273.15" stroke-dashoffset="37" />
+    <circle cx="500" cy="500" r="470" fill="none" stroke="#4d586b" stroke-width="2.5" opacity="0.7" />
+    <circle cx="500" cy="500" r="413" fill="none" stroke="#080a0e" stroke-width="6" />
+  </g>
+
+  <g id="inner-portal" clip-path="url(#portalClip)">
+    <circle cx="500" cy="500" r="395" fill="url(#bgRadial)" />
+    <circle cx="500" cy="500" r="240" fill="#ff0019" opacity="0.10" />
+    <circle cx="500" cy="500" r="150" fill="#ff0019" opacity="0.15" />
+
+    <g id="atom-system" transform="translate(500, 500)">
+      <g transform="rotate(-26)">
+        <ellipse cx="0" cy="0" rx="305" ry="115" fill="none" stroke="#ff0019" stroke-width="34" opacity="0.12" />
+        <ellipse cx="0" cy="0" rx="305" ry="115" fill="none" stroke="#ff0019" stroke-width="22" opacity="0.24" />
+        <ellipse cx="0" cy="0" rx="305" ry="115" fill="none" stroke="#ff1e38" stroke-width="13" opacity="0.55" />
+        <ellipse cx="0" cy="0" rx="305" ry="115" fill="none" stroke="#ff667d" stroke-width="7.5" opacity="0.9" />
+        <ellipse cx="0" cy="0" rx="305" ry="115" fill="none" stroke="#fff0f3" stroke-width="3.2" />
+        <g class="electron" data-d="7" data-p="0">
+          <circle cx="0" cy="0" r="32" fill="#ff0019" opacity="0.25" />
+          <circle cx="0" cy="0" r="24" fill="#ff0a22" opacity="0.45" />
+          <circle cx="0" cy="0" r="20" fill="#210308" stroke="#ff2a44" stroke-width="4" />
+          <circle cx="0" cy="0" r="20" fill="none" stroke="#ffc2cc" stroke-width="1.5" />
+          <circle cx="0" cy="0" r="11" fill="url(#electronSphere)" />
+          <circle cx="-3.5" cy="-3.5" r="2.8" fill="#ffffff" />
+        </g>
+        <g class="electron" data-d="7" data-p="0.5">
+          <circle cx="0" cy="0" r="32" fill="#ff0019" opacity="0.25" />
+          <circle cx="0" cy="0" r="24" fill="#ff0a22" opacity="0.45" />
+          <circle cx="0" cy="0" r="20" fill="#210308" stroke="#ff2a44" stroke-width="4" />
+          <circle cx="0" cy="0" r="20" fill="none" stroke="#ffc2cc" stroke-width="1.5" />
+          <circle cx="0" cy="0" r="11" fill="url(#electronSphere)" />
+          <circle cx="-3.5" cy="-3.5" r="2.8" fill="#ffffff" />
+        </g>
+      </g>
+
+      <g transform="rotate(34)">
+        <ellipse cx="0" cy="0" rx="305" ry="115" fill="none" stroke="#ff0019" stroke-width="34" opacity="0.12" />
+        <ellipse cx="0" cy="0" rx="305" ry="115" fill="none" stroke="#ff0019" stroke-width="22" opacity="0.24" />
+        <ellipse cx="0" cy="0" rx="305" ry="115" fill="none" stroke="#ff1e38" stroke-width="13" opacity="0.55" />
+        <ellipse cx="0" cy="0" rx="305" ry="115" fill="none" stroke="#ff667d" stroke-width="7.5" opacity="0.9" />
+        <ellipse cx="0" cy="0" rx="305" ry="115" fill="none" stroke="#fff0f3" stroke-width="3.2" />
+        <g class="electron" data-d="9" data-p="0">
+          <circle cx="0" cy="0" r="32" fill="#ff0019" opacity="0.25" />
+          <circle cx="0" cy="0" r="24" fill="#ff0a22" opacity="0.45" />
+          <circle cx="0" cy="0" r="20" fill="#210308" stroke="#ff2a44" stroke-width="4" />
+          <circle cx="0" cy="0" r="20" fill="none" stroke="#ffc2cc" stroke-width="1.5" />
+          <circle cx="0" cy="0" r="11" fill="url(#electronSphere)" />
+          <circle cx="-3.5" cy="-3.5" r="2.8" fill="#ffffff" />
+        </g>
+        <g class="electron" data-d="9" data-p="0.5">
+          <circle cx="0" cy="0" r="32" fill="#ff0019" opacity="0.25" />
+          <circle cx="0" cy="0" r="24" fill="#ff0a22" opacity="0.45" />
+          <circle cx="0" cy="0" r="20" fill="#210308" stroke="#ff2a44" stroke-width="4" />
+          <circle cx="0" cy="0" r="20" fill="none" stroke="#ffc2cc" stroke-width="1.5" />
+          <circle cx="0" cy="0" r="11" fill="url(#electronSphere)" />
+          <circle cx="-3.5" cy="-3.5" r="2.8" fill="#ffffff" />
+        </g>
+      </g>
+
+      <g transform="rotate(94)">
+        <ellipse cx="0" cy="0" rx="305" ry="115" fill="none" stroke="#ff0019" stroke-width="34" opacity="0.12" />
+        <ellipse cx="0" cy="0" rx="305" ry="115" fill="none" stroke="#ff0019" stroke-width="22" opacity="0.24" />
+        <ellipse cx="0" cy="0" rx="305" ry="115" fill="none" stroke="#ff1e38" stroke-width="13" opacity="0.55" />
+        <ellipse cx="0" cy="0" rx="305" ry="115" fill="none" stroke="#ff667d" stroke-width="7.5" opacity="0.9" />
+        <ellipse cx="0" cy="0" rx="305" ry="115" fill="none" stroke="#fff0f3" stroke-width="3.2" />
+        <g class="electron" data-d="11" data-p="0">
+          <circle cx="0" cy="0" r="32" fill="#ff0019" opacity="0.25" />
+          <circle cx="0" cy="0" r="24" fill="#ff0a22" opacity="0.45" />
+          <circle cx="0" cy="0" r="20" fill="#210308" stroke="#ff2a44" stroke-width="4" />
+          <circle cx="0" cy="0" r="20" fill="none" stroke="#ffc2cc" stroke-width="1.5" />
+          <circle cx="0" cy="0" r="11" fill="url(#electronSphere)" />
+          <circle cx="-3.5" cy="-3.5" r="2.8" fill="#ffffff" />
+        </g>
+        <g class="electron" data-d="11" data-p="0.5">
+          <circle cx="0" cy="0" r="32" fill="#ff0019" opacity="0.25" />
+          <circle cx="0" cy="0" r="24" fill="#ff0a22" opacity="0.45" />
+          <circle cx="0" cy="0" r="20" fill="#210308" stroke="#ff2a44" stroke-width="4" />
+          <circle cx="0" cy="0" r="20" fill="none" stroke="#ffc2cc" stroke-width="1.5" />
+          <circle cx="0" cy="0" r="11" fill="url(#electronSphere)" />
+          <circle cx="-3.5" cy="-3.5" r="2.8" fill="#ffffff" />
+        </g>
+      </g>
+
+      <g id="nucleus">
+        <circle cx="0" cy="0" r="102" fill="#ff0015" opacity="0.15" />
+        <circle cx="0" cy="0" r="88" fill="#ff0015" opacity="0.32" />
+        <circle cx="0" cy="0" r="78" fill="url(#nucleusSphere)" />
+        <ellipse cx="-25" cy="-25" rx="22" ry="14" transform="rotate(-35 -25 -25)" fill="#ffffff" opacity="0.45" />
+        <ellipse cx="-26" cy="-26" rx="13" ry="7.5" transform="rotate(-35 -26 -26)" fill="#ffffff" opacity="0.85" />
+      </g>
+    </g>
+
+    <g id="curved-movie-reel">
+      <path d="M 382,722 C 522,617 687,532 887,472 L 907,642 C 707,702 542,787 402,892 Z" fill="#000000" opacity="0.6" />
+      <g clip-path="url(#reelCurveClip)">
+        <path d="M 390,715 C 530,610 695,525 895,465 L 915,635 C 715,695 550,780 410,885 Z" fill="url(#filmGrad)" />
+        <path d="M 396,765 C 536,660 701,575 901,515 L 909,585 C 709,645 544,730 404,835 Z" fill="#ffffff" opacity="0.05" />
+        <g stroke="#151118" stroke-width="15" opacity="0.94">
+          <line x1="400" y1="705" x2="420" y2="890" />
+          <line x1="518" y1="622" x2="538" y2="805" />
+          <line x1="698" y1="532" x2="718" y2="715" />
+          <line x1="868" y1="472" x2="888" y2="655" />
+        </g>
+        <path d="M 390,715 C 530,610 695,525 895,465 L 899,497 C 699,557 534,642 394,747 Z" fill="#141118" />
+        <path d="M 406,853 C 546,748 711,663 911,603 L 915,635 C 715,695 550,780 410,885 Z" fill="#141118" />
+        <path d="M 392,731 C 532,626 697,541 897,481" fill="none" stroke="#5c4752" stroke-width="13" stroke-dasharray="18 18" stroke-dashoffset="6" />
+        <path d="M 408,869 C 548,764 713,679 913,619" fill="none" stroke="#5c4752" stroke-width="13" stroke-dasharray="18 18" stroke-dashoffset="6" />
+        <path d="M 394,747 C 534,642 699,557 899,497" fill="none" stroke="#2e2229" stroke-width="2" />
+        <path d="M 406,853 C 546,748 711,663 911,603" fill="none" stroke="#2e2229" stroke-width="2" />
+        <g fill="#ff3b4e">
+          <circle cx="475" cy="765" r="3.5" opacity="0.85" />
+          <circle cx="565" cy="715" r="4" opacity="0.9" />
+          <circle cx="605" cy="665" r="3" opacity="0.75" />
+          <circle cx="645" cy="705" r="8" fill="#ff0a22" opacity="0.35" />
+          <circle cx="645" cy="705" r="3.5" fill="#ffb3be" />
+          <circle cx="745" cy="595" r="3.5" opacity="0.9" />
+          <circle cx="775" cy="625" r="3" opacity="0.85" />
+          <circle cx="805" cy="575" r="4" opacity="0.95" />
+          <circle cx="835" cy="605" r="3.5" opacity="0.9" />
+          <circle cx="855" cy="555" r="3" opacity="0.8" />
+        </g>
+      </g>
+      <line x1="390" y1="715" x2="410" y2="885" stroke="#141118" stroke-width="8" />
+    </g
