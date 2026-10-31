@@ -100,9 +100,11 @@ tbody tr:hover{background:rgba(255,42,61,.08)}
 /* DOWNLOAD */
 .dl{text-align:center}
 .dl .big{position:relative;display:inline-block;margin-top:6px}
-.dl .big::before,.dl .big::after{content:"";position:absolute;inset:-4px;border-radius:999px;border:2px solid var(--red);animation:ping 2.4s infinite;opacity:0}
+.dl .big::before,.dl .big::after{content:"";pointer-events:none;position:absolute;inset:-4px;border-radius:999px;border:2px solid var(--red);animation:ping 2.4s infinite;opacity:0}
 .dl .big::after{animation-delay:1.2s}
-.dl .btn{padding:17px 44px;font-size:1.1rem}
+.dl .btn{padding:17px 44px;font-size:1.1rem;position:relative;z-index:2}
+.copylink{display:none;margin:12px auto 0;background:none;border:1px solid var(--red-deep);color:var(--red-hot);border-radius:999px;padding:6px 16px;cursor:pointer;font:600 .8rem var(--font)}
+.copylink.show{display:block}
 .bar{width:min(340px,80%);height:6px;margin:18px auto 0;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden;opacity:0;transition:opacity .3s}
 .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--red-deep),var(--red),#fff);box-shadow:0 0 12px var(--red)}
 .bar.on{opacity:1}
@@ -363,6 +365,7 @@ footer b{color:var(--red-hot)}
       </a>
     </div></div>
     <div class="bar" id="bar"><i></i></div>
+    <button class="copylink" id="copyLink" type="button">Copy direct link</button>
     <p class="note" id="note">Android only. Allow "Install unknown apps" when your phone asks.</p>
   </section>
 </main>
@@ -410,6 +413,12 @@ const title = document.getElementById("title");
 
 // Spec table + download link (rebuilt whenever config.json loads)
 const specs = document.getElementById("specs");
+const cleanUrl=u=>{
+  u=String(u||"").trim();
+  if(/^https?:\/\//i.test(u)) return u;
+  if(u && !/\s/.test(u) && u.includes(".") && !/^PASTE/i.test(u)) return "https://"+u.replace(/^\/+/,"");
+  return "";
+};
 function render(){
   specs.innerHTML="";
   specList(CONFIG).forEach(([k,v,copy],i)=>{
@@ -419,7 +428,8 @@ function render(){
     specs.appendChild(tr);
   });
   if(CONFIG.logoSrc) document.getElementById("logo").innerHTML='<img src="'+CONFIG.logoSrc+'" alt="Uranium TV logo">';
-  const b=document.getElementById("dlBtn"); if(b) b.href = /^https?:\/\//.test(CONFIG.apkUrl) ? CONFIG.apkUrl : "#";
+  const b=document.getElementById("dlBtn"); if(b) b.href = cleanUrl(CONFIG.apkUrl) || "#";
+  const cl=document.getElementById("copyLink"); if(cl) cl.classList.toggle("show", !!cleanUrl(CONFIG.apkUrl));
 }
 render();
 fetch("config.json?v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(c=>{Object.assign(CONFIG,c);render();}).catch(()=>{});
@@ -468,8 +478,13 @@ document.querySelectorAll(".card").forEach(c=>{
 
 // Download button
 const btn=document.getElementById("dlBtn"), bar=document.getElementById("bar"), note=document.getElementById("note");
+document.getElementById("copyLink").addEventListener("click",e=>{
+  const u=cleanUrl(CONFIG.apkUrl); if(!u) return;
+  (navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(()=>{e.target.textContent="Copied!"}).catch(()=>{prompt("Copy this link:",u)});
+  setTimeout(()=>e.target.textContent="Copy direct link",1600);
+});
 btn.addEventListener("click",e=>{
-  if(!/^https?:\/\//.test(CONFIG.apkUrl)){ e.preventDefault(); note.textContent="Download link not added yet."; return; }
+  if(!cleanUrl(CONFIG.apkUrl)){ e.preventDefault(); note.textContent="Download link not added yet."; return; }
   bar.classList.remove("on"); void bar.offsetWidth; bar.classList.add("on");
   note.textContent="Download started. Check your notifications.";
 });
