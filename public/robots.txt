@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://uranium-tv.neutron235.workers.dev/sitemap.xml
