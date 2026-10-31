@@ -272,4 +272,269 @@ footer b{color:var(--red-hot)}
         </g>
       </g>
       <line x1="390" y1="715" x2="410" y2="885" stroke="#141118" stroke-width="8" />
-    </g
+    </g>
+
+    <circle cx="500" cy="500" r="388" fill="none" stroke="#000000" stroke-width="18" opacity="0.55" />
+  </g>
+
+  <g id="outer-red-ring">
+    <circle cx="500" cy="500" r="392" fill="none" stroke="#ff0019" stroke-width="36" opacity="0.18" />
+    <circle cx="500" cy="500" r="392" fill="none" stroke="#ff0019" stroke-width="24" opacity="0.38" />
+    <circle cx="500" cy="500" r="392" fill="none" stroke="#ff1e38" stroke-width="14" opacity="0.85" />
+    <circle cx="500" cy="500" r="392" fill="none" stroke="#ff99a8" stroke-width="5.5" />
+    <circle cx="500" cy="500" r="392" fill="none" stroke="#fff0f3" stroke-width="2" />
+    <g fill="#ff2a40" stroke="#ff99a8" stroke-width="1.5">
+      <rect x="472" y="136" width="56" height="14" rx="3" />
+      <rect x="472" y="850" width="56" height="14" rx="3" />
+      <rect x="136" y="472" width="14" height="56" rx="3" />
+      <rect x="850" y="472" width="14" height="56" rx="3" />
+    </g>
+    <g fill="#e6192e">
+      <rect x="466" y="86" width="68" height="9" rx="2" />
+      <rect x="466" y="905" width="68" height="9" rx="2" />
+      <rect x="86" y="466" width="9" height="68" rx="2" />
+      <rect x="905" y="466" width="9" height="68" rx="2" />
+    </g>
+  </g>
+</svg>
+    </div>
+    <h1 id="title" aria-label="Uranium TV"></h1>
+    <p class="tag">Free movies and shows. Watch alone or together.</p>
+    <div class="cta-top"><a class="btn" href="#download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m0 0l-5-5m5 5l5-5M5 21h14"/></svg>GET THE APP</a></div>
+  </section>
+
+  <!-- INFO -->
+  <section id="about">
+    <div class="divider rv"></div>
+    <h2 class="rv">Why Uranium TV</h2>
+    <p class="lead rv">Uranium TV gives you free movies and shows in one app. No subscription, no payment, no hidden cost. Open it, pick something, and press play. And when you want company, watch together with a friend in perfect sync.</p>
+    <div class="grid" id="cards">
+      <div class="card rv left"><div class="ic">🎬</div><h3>Free movies and shows</h3><p>Browse a huge library and press play. Everything in the app is free, with no subscription and no sign-up fee.</p></div>
+      <div class="card rv"><div class="ic">🍿</div><h3>1 million+ movies and shows</h3><p>One of the biggest libraries in a single app. Whatever you're in the mood for, you'll find it.</p></div>
+      <div class="card rv right"><div class="ic">📚</div><h3>Every category, all in one place</h3><p>Action, comedy, romance, thriller, horror, drama, animation, and more. Whatever category you like, you'll find movies for it.</p></div>
+      <div class="card rv left"><div class="ic">🆕</div><h3>New content added regularly</h3><p>Fresh titles keep arriving, so there's always something new to watch.</p></div>
+      <div class="card rv"><div class="ic">▶️</div><h3>Smooth, easy playback</h3><p>A simple player with seek, pause, and quality options. Fast to open and easy to use.</p></div>
+      <div class="card rv right"><div class="ic">👥</div><h3>Watch together</h3><p>Invite a friend by username or room code and both screens play in sync. Chat live and send emoji reactions while you watch.</p></div>
+    </div>
+    <div class="stats">
+      <div class="stat rv"><b data-n="0" data-prefix="₹">₹0</b><small>to watch</small></div>
+      <div class="stat rv"><b data-n="1" data-suffix="M+">0</b><small>movies and shows</small></div>
+      <div class="stat rv"><b>All categories</b><small>of movies available</small></div>
+      <div class="stat rv"><b data-n="1" data-suffix=" tap">0</b><small>to start watching</small></div>
+    </div>
+  </section>
+
+  <!-- TABLE -->
+  <section id="details">
+    <div class="divider rv"></div>
+    <h2 class="rv">App details</h2>
+    <p class="lead rv">Everything about the current release, in one place.</p>
+    <div class="tbl rv" id="tbl">
+      <table>
+        <tbody id="specs"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- DOWNLOAD -->
+  <section class="dl" id="download">
+    <div class="divider rv" style="margin-inline:auto"></div>
+    <h2 class="rv">Ready to watch?</h2>
+    <p class="lead rv" style="margin-inline:auto">Download the APK, install it, and invite your friend.</p>
+    <div class="rv"><div class="big">
+      <!-- DOWNLOAD BUTTON: its link comes from config.json ("apkUrl") -->
+      <a class="btn" id="dlBtn" href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m0 0l-5-5m5 5l5-5M5 21h14"/></svg>
+        DOWNLOAD APK
+      </a>
+    </div></div>
+    <div class="bar" id="bar"><i></i></div>
+    <p class="note" id="note">Android only. Allow "Install unknown apps" when your phone asks.</p>
+  </section>
+</main>
+
+<footer>
+  <p class="rv"><b>URANIUM TV</b> — a Uranium project</p>
+</footer>
+
+<script>
+/* ================================================================
+   The values you change (download link, version, size, date) live in
+   the separate file  config.json  next to this page.
+   Edit config.json only; you never need to touch this file again.
+   The values below are just backups used if config.json can't be loaded.
+   ================================================================ */
+const CONFIG = {
+  logoSrc: "",
+  apkUrl: "",
+  packageName: "com.uranium.tv",
+  version: "1.0.0",
+  updated: "29 Oct 2026",
+  size: "— MB",
+  requires: "Android 7.0 or higher"
+};
+const specList = c => [
+  ["App name", "Uranium TV"],
+  ["Package name", c.packageName, true],
+  ["Version", c.version],
+  ["Last updated", c.updated],
+  ["Size", c.size],
+  ["Requires", c.requires],
+  ["Price", "Free"],
+  ["Content", "Free, no subscription"]
+];
+
+// Title letter-by-letter entrance
+const title = document.getElementById("title");
+[..."URANIUM TV"].forEach((ch,i)=>{
+  const s=document.createElement("span");
+  s.textContent = ch===" " ? "\u00A0" : ch;
+  s.style.animationDelay = (i*0.05)+"s";
+  s.setAttribute("aria-hidden","true");
+  title.appendChild(s);
+});
+
+// Spec table + download link (rebuilt whenever config.json loads)
+const specs = document.getElementById("specs");
+function render(){
+  specs.innerHTML="";
+  specList(CONFIG).forEach(([k,v,copy],i)=>{
+    const tr=document.createElement("tr");
+    tr.style.transitionDelay=(i*0.12)+"s";
+    tr.innerHTML = "<th>"+k+"</th><td>"+v+(copy?' <button class="copy" type="button">Copy</button>':"")+"</td>";
+    specs.appendChild(tr);
+  });
+  if(CONFIG.logoSrc) document.getElementById("logo").innerHTML='<img src="'+CONFIG.logoSrc+'" alt="Uranium TV logo">';
+  const b=document.getElementById("dlBtn"); if(b) b.href = /^https?:\/\//.test(CONFIG.apkUrl) ? CONFIG.apkUrl : "#";
+}
+render();
+fetch("config.json?v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(c=>{Object.assign(CONFIG,c);render();}).catch(()=>{});
+specs.addEventListener("click",e=>{
+  if(!e.target.classList.contains("copy")) return;
+  navigator.clipboard && navigator.clipboard.writeText(CONFIG.packageName);
+  e.target.textContent="Copied!"; setTimeout(()=>e.target.textContent="Copy",1400);
+});
+
+// Scroll reveal + counters
+const countUp = el=>{
+  const n=+el.dataset.n, pre=el.dataset.prefix||"", suf=el.dataset.suffix||"", t0=performance.now(), d=1400;
+  const step=t=>{const p=Math.min((t-t0)/d,1);el.textContent=pre+Math.round(n*(1-Math.pow(1-p,3)))+suf;if(p<1)requestAnimationFrame(step)};
+  requestAnimationFrame(step);
+};
+const io = new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting) return;
+  e.target.classList.add("in");
+  e.target.querySelectorAll("[data-n]").forEach(countUp);
+  if(e.target.matches("[data-n]")) countUp(e.target);
+  io.unobserve(e.target);
+}),{threshold:.18});
+document.querySelectorAll(".rv,.tbl").forEach((el,i)=>{
+  if(el.parentElement.id==="cards"||el.classList.contains("stat")) el.style.transitionDelay=(i%6*0.09)+"s";
+  io.observe(el);
+});
+// stats numbers: observe the number itself
+document.querySelectorAll(".stat b").forEach(b=>io.observe(b));
+
+// Scroll progress bar
+const prog=document.getElementById("progress");
+addEventListener("scroll",()=>{
+  const h=document.documentElement;
+  prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+"%";
+},{passive:true});
+
+// 3D tilt + spotlight on cards
+document.querySelectorAll(".card").forEach(c=>{
+  c.addEventListener("pointermove",e=>{
+    const r=c.getBoundingClientRect(), x=(e.clientX-r.left)/r.width, y=(e.clientY-r.top)/r.height;
+    c.style.setProperty("--mx",x*100+"%"); c.style.setProperty("--my",y*100+"%");
+    c.style.transform="rotateY("+((x-.5)*10)+"deg) rotateX("+((.5-y)*10)+"deg) translateZ(6px)";
+  });
+  c.addEventListener("pointerleave",()=>c.style.transform="");
+});
+
+// Download button
+const btn=document.getElementById("dlBtn"), bar=document.getElementById("bar"), note=document.getElementById("note");
+btn.addEventListener("click",e=>{
+  if(!/^https?:\/\//.test(CONFIG.apkUrl)){ e.preventDefault(); note.textContent="Download link not added yet."; return; }
+  bar.classList.remove("on"); void bar.offsetWidth; bar.classList.add("on");
+  note.textContent="Download started. Check your notifications.";
+});
+
+
+// Electrons: 3D-style orbital motion.
+// Each orbit is a circle (radius 305) tilted in 3D, which projects to the ellipse (305 x 115).
+// Electron at angle a: x = R cos a, y = r sin a, depth = sin a (near side when > 0).
+// Near side: bigger, brighter, in front of the nucleus. Far side: smaller, dimmer, behind it.
+// Inner-feeling orbits are faster, pairs sit 180deg apart, and a fading comet trail follows each electron.
+(function(){
+  const NS="http://www.w3.org/2000/svg", R=305, r=115;
+  const sys=document.getElementById("atom-system"), nuc=document.getElementById("nucleus");
+  const back=document.createElementNS(NS,"g"), front=document.createElementNS(NS,"g");
+  sys.insertBefore(back,nuc); sys.appendChild(front);
+  const tilts=[-26,-26,34,34,94,94].map(d=>d*Math.PI/180);
+  const periods=[6,6,8,8,10.5,10.5];
+  const offsets=[0,Math.PI,1.1,1.1+Math.PI,2.3,2.3+Math.PI];
+  const TRAIL=10, STEP=0.075;
+  const E=[...document.querySelectorAll(".electron")].map((el,i)=>{
+    el.removeAttribute("data-d");
+    const lines=[];
+    for(let k=0;k<TRAIL;k++){
+      const l=document.createElementNS(NS,"line");
+      const f=1-k/TRAIL;
+      l.setAttribute("stroke","#ff3b4e"); l.setAttribute("stroke-linecap","round");
+      l.setAttribute("stroke-width",(3+14*f).toFixed(1));
+      l.setAttribute("stroke-opacity",(0.55*f*f).toFixed(2));
+      back.appendChild(l); lines.push(l);
+    }
+    back.appendChild(el);
+    return {el,lines,th:tilts[i],w:6.2832/periods[i],off:offsets[i],layer:"back"};
+  });
+  const pos=(e,a)=>{
+    const x=R*Math.cos(a), y=r*Math.sin(a), c=Math.cos(e.th), s=Math.sin(e.th);
+    return [x*c-y*s, x*s+y*c, Math.sin(a)];
+  };
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const t0=performance.now();
+  function frame(now){
+    const t=reduce?0:(now-t0)/1000;
+    E.forEach(e=>{
+      const a=e.off+e.w*t, [X,Y,z]=pos(e,a);
+      const sc=1.25+0.5*z;                    // perspective: nearer = larger
+      e.el.setAttribute("transform","translate("+X.toFixed(1)+","+Y.toFixed(1)+") scale("+sc.toFixed(2)+")");
+      e.el.setAttribute("opacity",(0.72+0.28*z).toFixed(2));
+      const want=z>0?"front":"back";
+      if(want!==e.layer){(want==="front"?front:back).appendChild(e.el);e.layer=want}
+      let [px,py]=[X,Y];
+      e.lines.forEach((l,k)=>{
+        const [qx,qy]=pos(e,a-(k+1)*STEP);
+        l.setAttribute("x1",px.toFixed(1));l.setAttribute("y1",py.toFixed(1));
+        l.setAttribute("x2",qx.toFixed(1));l.setAttribute("y2",qy.toFixed(1));
+        px=qx;py=qy;
+      });
+    });
+    if(!reduce) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+
+// Background: drifting embers + atoms that react to the pointer
+const cv=document.getElementById("fx"), cx=cv.getContext("2d");
+let W,H,P=[],mouse={x:-999,y:-999};
+const resize=()=>{W=cv.width=innerWidth;H=cv.height=innerHeight;P=Array.from({length:Math.min(90,Math.floor(W/14))},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*2+.5,vy:-(Math.random()*.5+.15),vx:(Math.random()-.5)*.3,a:Math.random()*.6+.2}))};
+addEventListener("resize",resize); resize();
+addEventListener("pointermove",e=>{mouse.x=e.clientX;mouse.y=e.clientY});
+(function loop(){
+  cx.clearRect(0,0,W,H);
+  P.forEach(p=>{
+    const dx=p.x-mouse.x, dy=p.y-mouse.y, d=Math.hypot(dx,dy);
+    if(d<120){p.x+=dx/d*1.8;p.y+=dy/d*1.8}
+    p.x+=p.vx; p.y+=p.vy+Math.sin(p.x*.01)*.1;
+    if(p.y<-10){p.y=H+10;p.x=Math.random()*W}
+    cx.beginPath();cx.arc(p.x,p.y,p.r,0,6.283);
+    cx.fillStyle="rgba(255,60,75,"+p.a+")";cx.shadowColor="#ff2a3d";cx.shadowBlur=10;cx.fill();
+  });
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
