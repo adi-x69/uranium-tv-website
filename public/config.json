@@ -1,7 +1,7 @@
 {
   "apkUrl": "https://github.com/uranium-core/Uranium-TV/releases/download/Core-version/UraniumTV.apk",
   "version": "1.6.0",
-  "updated": "7 Oct 2026",
+  "updated": "7 Nov 2026",
   "size": "29.6 MB",
   "requires": "Android 7.0 or higher",
   "packageName": "com.uranium.tv",
